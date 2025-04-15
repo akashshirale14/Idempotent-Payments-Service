@@ -1,2 +1,5 @@
-org/example/TransactionStatus.class
 org/example/TransactionType.class
+org/example/Transaction.class
+org/example/db/MySQLDBStore.class
+org/example/TransactionStatus.class
+org/example/db/DBStoreInterface.class

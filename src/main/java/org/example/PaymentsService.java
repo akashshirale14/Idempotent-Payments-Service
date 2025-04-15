@@ -2,6 +2,8 @@ package org.example;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.example.db.CacheDBInterface;
+import org.example.db.DBStoreInterface;
+import org.example.db.MySQLDBStore;
 import org.example.db.RedisCacheDBLayer;
 
 enum TransactionStatus {
@@ -21,11 +23,16 @@ enum TransactionType {
     TransactionType(String name){
     }
 }
+
+class Transaction {}
+
 public class PaymentsService {
 
     private CacheDBInterface cacheDBInstance;
+    private DBStoreInterface dbStoreInstance;
     public PaymentsService() {
         cacheDBInstance =  new RedisCacheDBLayer();
+        dbStoreInstance = new MySQLDBStore();
     }
 
     public String generateIdempotencyKey(String userid) {
@@ -72,7 +79,6 @@ public class PaymentsService {
 
         return "Success";
     }
-
 
 
 }

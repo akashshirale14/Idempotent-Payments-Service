@@ -30,7 +30,13 @@ public class PaymentsAPI {
             String amount = request.headers("payment-amt");
             System.out.println(transactionType + " " + senderID + " " + receiverID +" " + amount);
             String statusMsg = paymentsService.storeTransactionStatusInfo(transactionType,key,senderID,receiverID,amount);
+            if(statusMsg.equals("Success")) {
+                //do transaction in SQL
+                paymentsService.;
+                //do logging in SQL
 
+                //send response
+            }
             return "Transaction Result : " + statusMsg;
         });
     }
