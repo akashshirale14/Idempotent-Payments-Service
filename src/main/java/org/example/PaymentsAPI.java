@@ -29,10 +29,12 @@ public class PaymentsAPI {
             String receiverID = request.headers("receiver-id");
             String amount = request.headers("payment-amt");
             System.out.println(transactionType + " " + senderID + " " + receiverID +" " + amount);
+            System.out.println("Storing status info..");
             String statusMsg = paymentsService.storeTransactionStatusInfo(transactionType,key,senderID,receiverID,amount);
             if(statusMsg.equals("Success")) {
                 //do transaction in SQL
-                paymentsService.;
+                System.out.println("Doing transaction...");
+                statusMsg = paymentsService.doTransactionInDB(key,senderID,receiverID,Integer.parseInt(amount),transactionType);
                 //do logging in SQL
 
                 //send response

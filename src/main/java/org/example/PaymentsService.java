@@ -80,5 +80,21 @@ public class PaymentsService {
         return "Success";
     }
 
+    public String doTransactionInDB(String transactionKey, String senderID,String receiverID,int amount,String opType){
+        boolean checkValid = dbStoreInstance.checkIfSenderReceiverExists(senderID,receiverID, amount);
+        System.out.println("CheckValid: " + checkValid);
+        if (!checkValid) {
+            return "Invalid Transaction: Check Sender & Receiver Is Valid or Not";
+        }
+        //Write to BalanceInfo & TransactionLog table
+
+        boolean status = dbStoreInstance.doTransactionInDB(transactionKey,senderID,receiverID,amount,opType);
+        if (status) {
+            return "Success: Money transfer was successful";
+        }
+        return "Failure";
+    }
+
+
 
 }
